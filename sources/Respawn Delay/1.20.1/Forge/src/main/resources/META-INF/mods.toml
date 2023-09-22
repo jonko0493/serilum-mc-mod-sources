@@ -6,11 +6,11 @@ logoFile="icon.png"
 
 [[mods]]
 modId="respawndelay"
-version="4.1"
+version="4.2"
 displayName="Respawn Delay"
 displayURL="https://curseforge.com/minecraft/mc-mods/respawn-delay"
 authors="Rick South"
-description='''
+description='''Players enter spectator mode on death for a configurable amount of time.
 '''
 credits='''Thank you very much to my Membership sponsors for supporting the development of this mod:  
 
@@ -22,6 +22,6 @@ If you would like to contribute too, check out https://ricksouth.com/donate. App
 [[dependencies.respawndelay]]
     modId="collective"
     mandatory=true
-    versionRange="[6.57,)"
+    versionRange="[6.65,)"
     ordering="NONE"
     side="BOTH"
