@@ -48,7 +48,7 @@ import java.util.UUID;
 //Preliminary, simple Fake Player class
 public class FakePlayer extends ServerPlayer {
 	    public FakePlayer(MinecraftServer minecraftServer, ServerLevel serverLevel, GameProfile gameProfile, ServerPlayerGameMode serverPlayerGameMode) {
-			super(minecraftServer, serverLevel, gameProfile, null);
+			super(minecraftServer, serverLevel, gameProfile, serverLevel.getRandomPlayer().clientInformation());
 		}
 		@Override public @NotNull Vec3 position(){ return new Vec3(0, 0, 0); }
 	    @Override public @NotNull BlockPos blockPosition(){ return BlockPos.ZERO; }

@@ -25,7 +25,8 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            args "-mixin.config=collective_forge.mixins.json", 
+            args "-mixin.config=collective_forge.mixins.json" // mixin
+
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Client'
             property 'mixin.env.remapRefMap', 'true'
@@ -40,7 +41,8 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            args "-mixin.config=collective_forge.mixins.json", 
+            args "-mixin.config=collective_forge.mixins.json" // mixin
+
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Server'
             property 'mixin.env.remapRefMap', 'true'
@@ -55,7 +57,8 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-            args "-mixin.config=collective_forge.mixins.json", 
+            args "-mixin.config=collective_forge.mixins.json" // mixin
+
             ideaModule "${rootProject.name}.${project.name}.main"
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             taskName 'Data'
@@ -82,8 +85,6 @@ dependencies {
 
 mixin { // mixin
     add sourceSets.main, "collective_forge.refmap.json" // mixin
-    add sourceSets.main, "collective_forge.refmap.json" // mixin
-    config 'collective_forge.mixins.json' // mixin
     config 'collective_forge.mixins.json' // mixin
     
     debug.verbose = true // mixin

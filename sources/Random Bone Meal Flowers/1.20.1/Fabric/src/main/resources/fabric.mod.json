@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "randombonemealflowers",
-  "version": "4.1",
+  "version": "4.3",
 
   "name": "Random Bone Meal Flowers",
   "description": "Randomizes the flowers spawned by bone meal, allowing all (modded) types to spawn everywhere.",
@@ -23,7 +23,7 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=6.72"
   },
 
   "custom": {

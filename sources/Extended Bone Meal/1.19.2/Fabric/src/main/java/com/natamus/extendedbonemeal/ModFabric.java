@@ -43,10 +43,6 @@ public class ModFabric implements ModInitializer {
 	}
 
 	private void loadEvents() {
-		CollectiveCropEvents.ON_BONE_MEAL_APPLY.register((Player player, Level world, BlockPos pos, BlockState state, ItemStack stack) -> {
-			return ExtendedEvent.onBoneMeal(player, world, pos, state, stack);
-		});
-
 		CollectiveBlockEvents.BLOCK_RIGHT_CLICK.register((Level world, Player player, InteractionHand hand, BlockPos pos, BlockHitResult hitVec) -> {
 			return ExtendedEvent.onCropClick(world, player, hand, pos, hitVec);
 		});

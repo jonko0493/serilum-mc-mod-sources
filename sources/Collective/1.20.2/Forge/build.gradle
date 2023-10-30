@@ -1,31 +1,39 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' } // mixin
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7.+' // mixin
-    }
+plugins {
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle'
+    id 'org.spongepowered.mixin' // mixin
 }
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin' // mixin
 
-archivesBaseName = "${mod_name}-forge-${minecraft_version}"
+base {
+    archivesName = "${mod_name}-forge-${minecraft_version}"
+}
+
+mixin { // mixin
+    add sourceSets.main, "collective_forge.refmap.json" // mixin
+    config 'collective_forge.mixins.json' // mixin
+    
+    debug.verbose = true // mixin
+    debug.export = true // mixin
+} // mixin
 
 minecraft {
-    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
-    
     mappings channel: 'official', version: minecraft_version
+
+    copyIdeResources = true //Calls processResources when in dev
+
+    // Automatically enable forge AccessTransformers if the file exists
+    // This location is hardcoded in Forge and can not be changed.
+    // https://github.com/MinecraftForge/MinecraftForge/blob/be1698bb1554f9c8fa2f58e32b9ab70bc4385e60/fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/ModFile.java#L123
+    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
 
     runs {
         client {
             workingDirectory project.file('run')
-            args "-mixin.config=collective_forge.mixins.json", 
+            args "-mixin.config=collective_forge.mixins.json" // mixin
+            
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Client'
             property 'mixin.env.remapRefMap', 'true'
@@ -40,7 +48,8 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            args "-mixin.config=collective_forge.mixins.json", 
+            args "-mixin.config=collective_forge.mixins.json" // mixin
+
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Server'
             property 'mixin.env.remapRefMap', 'true'
@@ -55,7 +64,8 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-            args "-mixin.config=collective_forge.mixins.json", 
+            args "-mixin.config=collective_forge.mixins.json" // mixin
+
             ideaModule "${rootProject.name}.${project.name}.main"
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             taskName 'Data'
@@ -75,39 +85,32 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor' // mixin
-
     compileOnly project(":Common")
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 
-mixin { // mixin
-    add sourceSets.main, "collective_forge.refmap.json" // mixin
-    add sourceSets.main, "collective_forge.refmap.json" // mixin
-    config 'collective_forge.mixins.json' // mixin
-    config 'collective_forge.mixins.json' // mixin
-    
-    debug.verbose = true // mixin
-    debug.export = true // mixin
-} // mixin
-
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     source(project(":Common").sourceSets.main.allSource)
+}
+tasks.withType(Javadoc).configureEach {
+    source(project(":Common").sourceSets.main.allJava)
+}
+tasks.named("sourcesJar", Jar) {
+    from(project(":Common").sourceSets.main.allSource)
 }
 
 processResources {
     from project(":Common").sourceSets.main.resources
 }
 
-
 jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            artifact jar
+            artifactId base.archivesName.get()
+            from components.java
+            fg.component(it)
         }
     }
     repositories {

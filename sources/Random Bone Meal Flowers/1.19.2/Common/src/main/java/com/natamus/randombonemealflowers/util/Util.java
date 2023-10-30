@@ -37,7 +37,7 @@ import java.util.List;
 public class Util {
 	public static List<Block> allflowers = new ArrayList<Block>();
 	public static List<Block> flowers = new ArrayList<Block>();
-
+	
 	private static final String dirpath = DataFunctions.getConfigDirectory() + File.separator + "randombonemealflowers";
 	private static final File dir = new File(dirpath);
 	private static final File file = new File(dirpath + File.separator + "blacklist.txt");
@@ -59,7 +59,7 @@ public class Util {
 
 		allflowers = new ArrayList<Block>();
 		flowers = new ArrayList<Block>();
-
+		
 		PrintWriter writer = null;
 		if (!dir.isDirectory() || !file.isFile()) {
 			if (dir.mkdirs()) {
@@ -75,7 +75,7 @@ public class Util {
 				}
 			}
 		}
-
+		
 		for (Block block : blockRegistry) {
 			if (block instanceof FlowerBlock) {
 				ResourceLocation rl = blockRegistry.getKey(block);

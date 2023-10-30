@@ -6,7 +6,7 @@ logoFile="icon.png"
 
 [[mods]]
 modId="collective"
-version="6.65"
+version="6.72"
 displayName="Collective"
 displayURL="https://curseforge.com/minecraft/mc-mods/collective"
 authors="Rick South"
@@ -18,13 +18,6 @@ Adam E, Alister, aternosorg, Cherriesaurus, FireStriker, Greg Johnson, Kreezxil,
 
 If you would like to contribute too, check out https://ricksouth.com/donate. Appreciate it! <3
 '''
-
-[[dependencies.collective]]
-    modId="forge"
-    mandatory=true
-    versionRange="[40,)"
-    ordering="NONE"
-    side="BOTH"
 
 [[dependencies.collective]]
     modId="minecraft"

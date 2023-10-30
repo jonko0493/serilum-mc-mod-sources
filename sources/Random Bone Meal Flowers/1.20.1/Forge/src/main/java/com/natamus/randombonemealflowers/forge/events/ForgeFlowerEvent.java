@@ -36,9 +36,4 @@ public class ForgeFlowerEvent {
 
 		Util.attemptFlowerlistProcessing(level);
     }
-
-	@SubscribeEvent
-	public void onBonemeal(BonemealEvent e) {
-		FlowerEvent.onBonemeal(e.getLevel(), e.getPos(), null, e.getStack());
-	}
 }

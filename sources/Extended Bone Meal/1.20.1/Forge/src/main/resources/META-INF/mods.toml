@@ -6,7 +6,7 @@ logoFile="icon.png"
 
 [[mods]]
 modId="extendedbonemeal"
-version="3.0"
+version="3.1"
 displayName="Extended Bone Meal"
 displayURL="https://curseforge.com/minecraft/mc-mods/extended-bone-meal"
 authors="Rick South"
@@ -22,6 +22,6 @@ If you would like to contribute too, check out https://ricksouth.com/donate. App
 [[dependencies.extendedbonemeal]]
     modId="collective"
     mandatory=true
-    versionRange="[6.57,)"
+    versionRange="[6.72,)"
     ordering="NONE"
     side="BOTH"
