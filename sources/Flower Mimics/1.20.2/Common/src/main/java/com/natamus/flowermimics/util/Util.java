@@ -31,6 +31,7 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -76,6 +77,11 @@ public class Util {
 		}
 
 		EntityType<?> mimicEntityType = MimicData.getMimicFromFlower(flowerBlock);
+		if (mimicEntityType == null) {
+			flowerIsAMimic.get(level).remove(flowerPos);
+			return;
+		}
+
 		Entity mimic = mimicEntityType.create(level);
 		if (mimic == null) {
 			return;
@@ -120,7 +126,9 @@ public class Util {
 		if (flowerBlock != null) {
 			if (ConfigHandler.dropExtraItemsOnMimicDeath && !flowerOnly) {
 				ItemStack mimicItemDropStack = MimicData.getFlowerMimicDrop(flowerBlock);
-				level.addFreshEntity(new ItemEntity(level, mimicVec.x, mimicVec.y+1, mimicVec.z, mimicItemDropStack));
+				if (!mimicItemDropStack.getItem().equals(Items.AIR)) {
+					level.addFreshEntity(new ItemEntity(level, mimicVec.x, mimicVec.y + 1, mimicVec.z, mimicItemDropStack));
+				}
 			}
 
 			if (ConfigHandler.dropFlowerItemOnMimicDeath) {

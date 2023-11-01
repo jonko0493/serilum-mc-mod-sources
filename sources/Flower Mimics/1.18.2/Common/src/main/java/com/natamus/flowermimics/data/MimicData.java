@@ -50,7 +50,7 @@ public class MimicData {
 
 	public static EntityType<?> getMimicFromFlower(Block block) {
 		if (!flowerToMimic.containsKey(block)) {
-			return EntityType.ZOMBIE;
+			return null;
 		}
 		return flowerToMimic.get(block);
 	}
@@ -82,6 +82,7 @@ public class MimicData {
 		defaultFlowerToMimic.put(Blocks.RED_TULIP, EntityType.SPIDER);
 		defaultFlowerToMimic.put(Blocks.ROSE_BUSH, EntityType.MAGMA_CUBE);
 		defaultFlowerToMimic.put(Blocks.SUNFLOWER, EntityType.CREEPER);
+		//defaultFlowerToMimic.put(Blocks.TORCHFLOWER, EntityType.BLAZE);
 		defaultFlowerToMimic.put(Blocks.WHITE_TULIP, EntityType.SKELETON);
 		defaultFlowerToMimic.put(Blocks.WITHER_ROSE, EntityType.WITHER_SKELETON);
 	}
@@ -102,13 +103,14 @@ public class MimicData {
 		defaultFlowerMimicDrops.put(Blocks.RED_TULIP, new ItemStack(Items.RABBIT_FOOT, 1));
 		defaultFlowerMimicDrops.put(Blocks.ROSE_BUSH, new ItemStack(Items.MAGMA_BLOCK, 14));
 		defaultFlowerMimicDrops.put(Blocks.SUNFLOWER, new ItemStack(Items.TNT, 5));
+		//defaultFlowerMimicDrops.put(Blocks.TORCHFLOWER, new ItemStack(Items.FIRE_CHARGE, 7));
 		defaultFlowerMimicDrops.put(Blocks.WHITE_TULIP, new ItemStack(Items.CAKE, 1));
 		defaultFlowerMimicDrops.put(Blocks.WITHER_ROSE, new ItemStack(Items.NETHERITE_SCRAP, 2));
 	}
 
 	public static EntityType<?> getDefaultMimicFromFlower(Block block) {
 		if (!defaultFlowerToMimic.containsKey(block)) {
-			return EntityType.ZOMBIE;
+			return null;
 		}
 		return defaultFlowerToMimic.get(block);
 	}
@@ -171,6 +173,10 @@ public class MimicData {
 				}
 
 				String mimicEntityTypeString = lspl[1].strip();
+				if (mimicEntityTypeString.equals("")) {
+					continue;
+				}
+
 				ResourceLocation mimicEntityTypeResourceLocation = new ResourceLocation(mimicEntityTypeString);
 
 				EntityType<?> mimicEntityType = level.registryAccess().registryOrThrow(Registry.ENTITY_TYPE.key()).get(mimicEntityTypeResourceLocation);
@@ -243,12 +249,15 @@ public class MimicData {
 			allFlowers.add(flowerBlock);
 
 			if (flowerMimicsWriter != null) {
-				EntityType<?> defaultMimic = getDefaultMimicFromFlower(flowerBlock);
-				ResourceLocation mimicRl = entityTypeRegistry.getKey(defaultMimic);
-
 				String mimicRlString = " ";
-				if (mimicRl != null) {
-					mimicRlString = mimicRl.toString();
+
+				EntityType<?> defaultMimic = getDefaultMimicFromFlower(flowerBlock);
+				if (defaultMimic != null) {
+					ResourceLocation mimicRl = entityTypeRegistry.getKey(defaultMimic);
+
+					if (mimicRl != null) {
+						mimicRlString = mimicRl.toString();
+					}
 				}
 
 				flowerMimicsWriter.println(flowerRLString + " ; " + mimicRlString);

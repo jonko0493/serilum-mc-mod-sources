@@ -52,7 +52,7 @@ public class MimicData {
 
 	public static EntityType<?> getMimicFromFlower(Block block) {
 		if (!flowerToMimic.containsKey(block)) {
-			return EntityType.ZOMBIE;
+			return null;
 		}
 		return flowerToMimic.get(block);
 	}
@@ -112,7 +112,7 @@ public class MimicData {
 
 	public static EntityType<?> getDefaultMimicFromFlower(Block block) {
 		if (!defaultFlowerToMimic.containsKey(block)) {
-			return EntityType.ZOMBIE;
+			return null;
 		}
 		return defaultFlowerToMimic.get(block);
 	}
@@ -175,6 +175,10 @@ public class MimicData {
 				}
 
 				String mimicEntityTypeString = lspl[1].strip();
+				if (mimicEntityTypeString.equals("")) {
+					continue;
+				}
+
 				ResourceLocation mimicEntityTypeResourceLocation = new ResourceLocation(mimicEntityTypeString);
 
 				EntityType<?> mimicEntityType = level.registryAccess().registryOrThrow(BuiltInRegistries.ENTITY_TYPE.key()).get(mimicEntityTypeResourceLocation);
@@ -247,12 +251,15 @@ public class MimicData {
 			allFlowers.add(flowerBlock);
 
 			if (flowerMimicsWriter != null) {
-				EntityType<?> defaultMimic = getDefaultMimicFromFlower(flowerBlock);
-				ResourceLocation mimicRl = entityTypeRegistry.getKey(defaultMimic);
-
 				String mimicRlString = " ";
-				if (mimicRl != null) {
-					mimicRlString = mimicRl.toString();
+
+				EntityType<?> defaultMimic = getDefaultMimicFromFlower(flowerBlock);
+				if (defaultMimic != null) {
+					ResourceLocation mimicRl = entityTypeRegistry.getKey(defaultMimic);
+
+					if (mimicRl != null) {
+						mimicRlString = mimicRl.toString();
+					}
 				}
 
 				flowerMimicsWriter.println(flowerRLString + " ; " + mimicRlString);
