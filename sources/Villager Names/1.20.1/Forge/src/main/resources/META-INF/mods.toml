@@ -6,11 +6,11 @@ logoFile="icon.png"
 
 [[mods]]
 modId="villagernames"
-version="5.2"
+version="6.0"
 displayName="Villager Names"
 displayURL="https://curseforge.com/minecraft/mc-mods/villager-names"
 authors="Rick South"
-description='''A minimalistic mod which gives all unnamed villagers a (pre-)defined name.
+description='''Gives all villagers and villager-like entities their own name.
 '''
 credits='''Thank you very much to my Membership sponsors for supporting the development of this mod:  
 
@@ -22,6 +22,6 @@ If you would like to contribute too, check out https://ricksouth.com/donate. App
 [[dependencies.villagernames]]
     modId="collective"
     mandatory=true
-    versionRange="[6.57,)"
+    versionRange="[6.80,)"
     ordering="NONE"
     side="BOTH"

@@ -275,6 +275,6 @@ public class Util {
 	}
 	
 	private static String getRandomAreaName() {
-		return GlobalVariables.areanames.get(GlobalVariables.random.nextInt(GlobalVariables.areanames.size()));
+		return GlobalVariables.areaNames.get(GlobalVariables.random.nextInt(GlobalVariables.areaNames.size()));
 	}
 }

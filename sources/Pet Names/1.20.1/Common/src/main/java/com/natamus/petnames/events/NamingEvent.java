@@ -31,6 +31,6 @@ public class NamingEvent {
 			return;
 		}
 		
-		EntityFunctions.nameEntity(offspring, StringFunctions.getRandomName(ConfigHandler._useMaleNames, ConfigHandler._useFemaleNames));
+		EntityFunctions.nameEntity(offspring, StringFunctions.getRandomName(ConfigHandler._useFemaleNames, ConfigHandler._useMaleNames));
 	}
 }

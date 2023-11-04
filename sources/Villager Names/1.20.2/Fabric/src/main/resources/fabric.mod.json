@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "villagernames",
-  "version": "5.2",
+  "version": "6.0",
 
   "name": "Villager Names",
-  "description": "A minimalistic mod which gives all unnamed villagers a (pre-)defined name.",
+  "description": "Gives all villagers and villager-like entities their own name.",
   "authors": [ "Rick South" ],
   "contact": {
     "homepage": "https://curseforge.com/minecraft/mc-mods/villager-names",
@@ -17,13 +17,16 @@
 
   "environment": "*",
   "entrypoints": { "main": [ "com.natamus.villagernames.ModFabric" ], "modmenu": [ "com.natamus.villagernames.fabric.config.IntegrateModMenu" ] },
+  "mixins": [
+    "villagernames_fabric.mixins.json"
+  ],
 
   "depends": {
     "fabricloader": ">=0.12.5",
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=6.80"
   },
 
   "custom": {

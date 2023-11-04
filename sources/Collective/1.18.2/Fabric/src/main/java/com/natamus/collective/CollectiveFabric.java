@@ -17,6 +17,7 @@
 package com.natamus.collective;
 
 import com.natamus.collective.check.RegisterMod;
+import com.natamus.collective.config.GenerateJSONFiles;
 import com.natamus.collective.data.GlobalConstants;
 import com.natamus.collective.events.CollectiveEvents;
 import com.natamus.collective.fabric.data.GlobalFabricObjects;
@@ -25,6 +26,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -34,6 +36,10 @@ public class CollectiveFabric implements ModInitializer {
 	public void onInitialize() {
 		setGlobalConstants();
 		CollectiveCommon.init();
+
+		ServerWorldEvents.LOAD.register((MinecraftServer minecraftServer, ServerLevel level) -> {
+			GenerateJSONFiles.initGeneration(minecraftServer);
+		});
 		
 		ServerTickEvents.START_WORLD_TICK.register((ServerLevel world) -> {
 			CollectiveEvents.onWorldTick(world);

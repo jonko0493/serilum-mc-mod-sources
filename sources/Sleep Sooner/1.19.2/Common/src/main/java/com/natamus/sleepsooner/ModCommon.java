@@ -16,7 +16,9 @@
 
 package com.natamus.sleepsooner;
 
+import com.natamus.collective.config.GenerateJSONFiles;
 import com.natamus.sleepsooner.config.ConfigHandler;
+import com.natamus.sleepsooner.util.Reference;
 
 public class ModCommon {
 
@@ -26,6 +28,6 @@ public class ModCommon {
 	}
 
 	private static void load() {
-		
+		GenerateJSONFiles.requestJSONFile(Reference.MOD_ID, "linger_messages.json");
 	}
 }

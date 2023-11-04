@@ -23,3 +23,6 @@ accessible method net/minecraft/world/damagesource/DamageSource <init> (Ljava/la
 accessible field net/minecraft/world/item/Item category Lnet/minecraft/world/item/CreativeModeTab;
 mutable field net/minecraft/world/item/Item category Lnet/minecraft/world/item/CreativeModeTab;
 accessible field net/minecraft/client/KeyMapping key Lcom/mojang/blaze3d/platform/InputConstants$Key;
+accessible field net/minecraft/world/inventory/MerchantMenu trader Lnet/minecraft/world/item/trading/Merchant;
+accessible field net/minecraft/client/gui/screens/Screen title Lnet/minecraft/network/chat/Component;
+mutable field net/minecraft/client/gui/screens/Screen title Lnet/minecraft/network/chat/Component;

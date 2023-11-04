@@ -28,7 +28,7 @@ public class ForgeVillagerEvent {
 	public void onSpawn(EntityJoinWorldEvent e) {
 		VillagerEvent.onSpawn(e.getWorld(), e.getEntity());
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent.EntityInteract e) {
 		VillagerEvent.onVillagerInteract(e.getPlayer(), e.getWorld(), e.getHand(), e.getTarget(), null);

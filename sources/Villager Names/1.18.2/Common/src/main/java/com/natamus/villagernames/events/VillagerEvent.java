@@ -16,13 +16,16 @@
 
 package com.natamus.villagernames.events;
 
-import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Pair;
 import com.natamus.collective.functions.EntityFunctions;
-import com.natamus.collective.functions.JsonFunctions;
-import com.natamus.collective.functions.TaskFunctions;
 import com.natamus.villagernames.config.ConfigHandler;
+import com.natamus.villagernames.data.Variables;
 import com.natamus.villagernames.util.Names;
+import com.natamus.villagernames.util.Reference;
+import com.natamus.villagernames.util.Util;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -32,11 +35,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 
-import java.util.HashMap;
-
 public class VillagerEvent {
 	public static void onSpawn(Level level, Entity entity) {
 		if (level.isClientSide) {
+			return;
+		}
+
+		if (entity.getTags().contains(Reference.MOD_ID + ".named")) {
 			return;
 		}
 
@@ -52,25 +57,31 @@ public class VillagerEvent {
 				return;
 			}
 		}
-		
-		if (!entity.hasCustomName()) {
-			EntityFunctions.nameEntity(entity, Names.getRandomName());
+
+		if (entity.hasCustomName()) {
+			if (!Util.shouldOverwriteName(entity)) {
+				return;
+			}
 		}
+		
+
+		EntityFunctions.nameEntity(entity, Names.getRandomName());
+		entity.getTags().add(Reference.MOD_ID + ".named");
 	}
-	
+
 	public static InteractionResult onVillagerInteract(Player player, Level level, InteractionHand hand, Entity entity, EntityHitResult hitResult) {
-		if (level.isClientSide) {
+		if (!level.isClientSide) { // Client side only!
 			return InteractionResult.PASS;
 		}
 
 		if (!entity.getClass().equals(Villager.class)) {
 			return InteractionResult.PASS;
 		}
-		
+
 		if (!entity.hasCustomName()) {
 			return InteractionResult.PASS;
 		}
-		
+
 		if (player.isCrouching()) {
 			return InteractionResult.PASS;
 		}
@@ -78,47 +89,30 @@ public class VillagerEvent {
 		if (!hand.equals(InteractionHand.MAIN_HAND)) {
 			return InteractionResult.PASS;
 		}
-		
+
 		Villager villager = (Villager)entity;
 		VillagerData d = villager.getVillagerData();
-		
-		String profession = d.getProfession().toString();
-		if (profession.equals("none") || profession.equals("nitwit")) {
+
+		String rawProfession = d.getProfession().toString();
+		if (rawProfession.equals("none") || rawProfession.equals("nitwit")) {
 			return InteractionResult.PASS;
 		}
-		
-		if (profession.contains(":")) {
-			profession = profession.split(":")[1];
+
+		if (rawProfession.contains(":")) {
+			rawProfession = rawProfession.split(":")[1];
 		}
-		if (profession.contains("-")) {
-			profession = profession.split("-")[0].trim();
+		if (rawProfession.contains("-")) {
+			rawProfession = rawProfession.split("-")[0];
 		}
-		
-		Component namecomponent = villager.getName();
 
-		try {
-			String json = Component.Serializer.toJson(namecomponent); // {"bold":true,"color":"blue","text":"Hero Villager"}
-			HashMap<String, String> map = JsonFunctions.JsonStringToHashMap(json);
+		String translatableInput = "entity.minecraft.villager." + rawProfession.trim();
+		Component profession = new TranslatableComponent(translatableInput);
 
-			String prevname = map.get("text");
-			String upperprofession = profession.substring(0, 1).toUpperCase() + profession.substring(1);
-
-			if (prevname.contains(upperprofession)) {
-				return InteractionResult.PASS;
-			}
-
-			map.put("text", prevname + " the " + upperprofession);
-			villager.setCustomName(Component.Serializer.fromJson(JsonFunctions.HashMapToJsonString(map)));
-
-			TaskFunctions.enqueueCollectiveTask(level.getServer(), () -> {
-				map.put("text", prevname.replace(" the ", "").replace(upperprofession, ""));
-				villager.setCustomName(Component.Serializer.fromJson(JsonFunctions.HashMapToJsonString(map)));
-			}, 0);
+		if (translatableInput.equals(profession.getString())) {
+			profession = new TextComponent(rawProfession.substring(0, 1).toUpperCase() + rawProfession.substring(1));
 		}
-		catch (JsonSyntaxException ex) {
-			return InteractionResult.PASS;
-		}
-		
-		return InteractionResult.SUCCESS;
+
+		Variables.tradedVillagerPair = new Pair<Component, Component>(villager.getName(), profession);
+		return InteractionResult.PASS;
 	}
 }

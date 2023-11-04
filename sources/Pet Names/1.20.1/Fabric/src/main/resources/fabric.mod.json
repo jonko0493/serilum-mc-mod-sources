@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "petnames",
-  "version": "3.0",
+  "version": "3.1",
 
   "name": "Pet Names",
   "description": "Gives tamable baby animals a pre-defined name. For Wolves, Cats, Horses, Donkeys, Mules and Llamas.",
@@ -23,7 +23,7 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=6.80"
   },
 
   "custom": {

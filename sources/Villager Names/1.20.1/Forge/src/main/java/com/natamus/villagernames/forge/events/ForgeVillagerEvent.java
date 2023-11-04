@@ -28,7 +28,7 @@ public class ForgeVillagerEvent {
 	public void onSpawn(EntityJoinLevelEvent e) {
 		VillagerEvent.onSpawn(e.getLevel(), e.getEntity());
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent.EntityInteract e) {
 		VillagerEvent.onVillagerInteract(e.getEntity(), e.getLevel(), e.getHand(), e.getTarget(), null);

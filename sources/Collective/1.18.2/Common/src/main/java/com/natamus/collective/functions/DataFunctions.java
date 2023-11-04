@@ -18,9 +18,13 @@ package com.natamus.collective.functions;
 
 import com.natamus.collective.services.Services;
 import net.minecraft.SharedConstants;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.packs.resources.Resource;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -94,4 +98,21 @@ public class DataFunctions {
 		
 		return b;
 	}
+
+	public static InputStream getDataInputStream(MinecraftServer minecraftServer, String modid, String folder, String fileNameWithoutExtension, String fileExtension) {
+		return getDataInputStream(minecraftServer, modid, folder, fileNameWithoutExtension + fileExtension);
+	}
+    public static InputStream getDataInputStream(MinecraftServer minecraftServer, String modid, String folder, String fileName) {
+		folder = folder.replace("\\", "/").strip();
+		if (!folder.endsWith("/")) {
+			folder = folder + "/";
+		}
+
+        try {
+            Resource resource = minecraftServer.getResourceManager().getResource(new ResourceLocation(modid + ":" + folder + fileName));
+            return resource.getInputStream();
+        }
+        catch (Exception ignored) { }
+        return null;
+    }
 }

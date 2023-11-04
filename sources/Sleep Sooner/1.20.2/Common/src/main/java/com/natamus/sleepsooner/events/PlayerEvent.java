@@ -70,7 +70,7 @@ public class PlayerEvent {
 		WorldFunctions.setWorldTime((ServerLevel)level, 12540);
 
 		if (ConfigHandler.enablePreSleepMessage) {
-			String unique = GlobalVariables.lingermessages.get(GlobalVariables.random.nextInt(GlobalVariables.lingermessages.size()));
+			String unique = GlobalVariables.lingerMessages.get(GlobalVariables.random.nextInt(GlobalVariables.lingerMessages.size()));
 			
 			StringFunctions.sendMessage(player, "You " + unique + " until dusk. You may now sleep.", ChatFormatting.DARK_GREEN);
 		}

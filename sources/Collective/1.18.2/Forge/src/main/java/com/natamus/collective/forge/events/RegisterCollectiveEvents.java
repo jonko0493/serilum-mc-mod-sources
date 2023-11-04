@@ -16,6 +16,7 @@
 
 package com.natamus.collective.forge.events;
 
+import com.natamus.collective.config.GenerateJSONFiles;
 import com.natamus.collective.events.CollectiveEvents;
 import com.natamus.collective.functions.WorldFunctions;
 import com.natamus.collective.util.CollectiveReference;
@@ -26,6 +27,7 @@ import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.WorldTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -33,6 +35,11 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 
 @EventBusSubscriber
 public class RegisterCollectiveEvents {
+    @SubscribeEvent
+    public void onServerStarted(ServerStartingEvent e) {
+        GenerateJSONFiles.initGeneration(e.getServer());
+    }
+
     @SubscribeEvent
     public void onWorldTick(WorldTickEvent e) {
         Level level = e.world;
