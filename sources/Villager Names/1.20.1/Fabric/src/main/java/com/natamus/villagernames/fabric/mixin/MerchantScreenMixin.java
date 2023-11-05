@@ -52,7 +52,7 @@ public abstract class MerchantScreenMixin extends AbstractContainerScreen<Mercha
 		ScreenFunctions.setMerchantScreenTitle((MerchantScreen)(Object)this, newTitle);
 	}
 
-	@ModifyVariable(method = "renderLabels(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/network/chat/Component;copy()Lnet/minecraft/network/chat/MutableComponent;", ordinal = 0))
+	@ModifyVariable(method = "renderLabels(Lnet/minecraft/client/gui/GuiGraphics;II)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;width(Lnet/minecraft/network/chat/FormattedText;)I", ordinal = 0))
 	public Component renderLabels_component(Component component) {
 		if (ConfigHandler.hideMerchantLevelTradeScreen) {
 			MutableComponent newTitle = Util.getTradeScreenTitle();
