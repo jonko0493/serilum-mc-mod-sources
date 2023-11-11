@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "infinitetrading",
-  "version": "4.0",
+  "version": "4.1",
 
   "name": "Infinite Trading",
   "description": "Prevents villager and wandering trader trades from locking up, making them be always available.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "areas",
-  "version": "5.1",
+  "version": "5.2",
 
   "name": "Areas",
   "description": "Create custom named areas/towns with a radius using signs, which sends join and leave messages.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.80"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

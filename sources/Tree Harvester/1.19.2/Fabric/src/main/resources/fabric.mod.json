@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "treeharvester",
-  "version": "8.2",
+  "version": "8.3",
 
   "name": "Tree Harvester",
   "description": "Harvest (nether) trees and giant mushrooms instantly with fast leaf decay and sapling replacement.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17",
-    "collective": ">=6.61"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

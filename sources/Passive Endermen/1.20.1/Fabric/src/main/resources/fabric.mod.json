@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "passiveendermen",
-  "version": "4.2",
+  "version": "4.3",
 
   "name": "Passive Endermen",
   "description": "Configurably prevent an enderman from picking up blocks, griefing and attacking players.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "anvilrestoration",
-  "version": "2.0",
+  "version": "2.1",
 
   "name": "Anvil Restoration",
   "description": "Adds the ability to repair placed anvils with iron ingots and destroy them with obsidian.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

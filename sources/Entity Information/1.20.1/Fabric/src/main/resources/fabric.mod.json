@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "entityinformation",
-  "version": "3.0",
+  "version": "3.1",
 
   "name": "Entity Information",
   "description": "Displays entity information on hit with the Information Stick. Useful for debugging and developing. Usage: /informationstick or /ist",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

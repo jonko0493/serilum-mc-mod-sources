@@ -17,18 +17,14 @@
 package com.natamus.guiclock.forge.events;
 
 import com.natamus.guiclock.events.GUIEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-public class ForgeGUIEvent extends Gui {
-	public ForgeGUIEvent(Minecraft mc, ItemRenderer itemRenderer){
-		super(mc, itemRenderer);
-	}
-	
+@EventBusSubscriber(value = Dist.CLIENT)
+public class ForgeGUIEvent {
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void renderOverlay(RenderGuiOverlayEvent.Post e) {
 		GUIEvent.renderOverlay(e.getGuiGraphics(), e.getPartialTick());

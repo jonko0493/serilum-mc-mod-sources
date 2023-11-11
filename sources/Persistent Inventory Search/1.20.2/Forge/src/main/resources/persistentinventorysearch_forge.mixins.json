@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.natamus.persistentinventorysearch.forge.mixin",
+  "plugin": "com.natamus.collective.forge.mixin.plugin.ForgeMixinConfigPlugin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "persistentinventorysearch_forge.refmap.json",
   "mixins": [

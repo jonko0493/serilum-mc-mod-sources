@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alternativeworldsavelocation",
-  "version": "3.1",
+  "version": "3.3",
 
   "name": "Alternative World Save Location",
   "description": "Allows changing the default save location of Minecraft worlds to outside the instance scope.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.5"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

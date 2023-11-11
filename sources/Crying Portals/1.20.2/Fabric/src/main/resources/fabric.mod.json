@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cryingportals",
-  "version": "2.3",
+  "version": "2.5",
 
   "name": "Crying Portals",
   "description": "Extends the blocks allowed for nether portal creation to use normal and crying obsidian.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.5"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

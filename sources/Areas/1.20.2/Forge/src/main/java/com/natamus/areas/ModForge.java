@@ -22,7 +22,6 @@ import com.natamus.areas.forge.events.ForgeClientEvent;
 import com.natamus.areas.forge.events.ForgeGUIEvent;
 import com.natamus.areas.util.Reference;
 import com.natamus.collective.check.RegisterMod;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -56,7 +55,7 @@ public class ModForge {
 	private void loadComplete(final FMLLoadCompleteEvent event) {
 		if (FMLEnvironment.dist.equals(Dist.CLIENT)) {
 			MinecraftForge.EVENT_BUS.register(new ForgeClientEvent());
-			MinecraftForge.EVENT_BUS.register(new ForgeGUIEvent(Minecraft.getInstance(), Minecraft.getInstance().getItemRenderer()));
+			MinecraftForge.EVENT_BUS.register(new ForgeGUIEvent());
 		}
     	MinecraftForge.EVENT_BUS.register(new ForgeAreaEvent());
 	}

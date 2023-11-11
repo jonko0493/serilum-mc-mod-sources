@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "tntbreaksbedrock",
-  "version": "3.0",
+  "version": "3.1",
 
   "name": "TNT Breaks Bedrock",
   "description": "Allows TNT to break bedrock. Now you've finally got easy access to the nether roof.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

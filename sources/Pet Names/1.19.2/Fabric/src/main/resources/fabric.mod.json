@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "petnames",
-  "version": "3.1",
+  "version": "3.2",
 
   "name": "Pet Names",
   "description": "Gives tamable baby animals a pre-defined name. For Wolves, Cats, Horses, Donkeys, Mules and Llamas.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17",
-    "collective": ">=6.80"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

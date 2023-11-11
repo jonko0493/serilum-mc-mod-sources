@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nutritiousmilk",
-  "version": "3.1",
+  "version": "3.2",
 
   "name": "Nutritious Milk",
   "description": "Adds a nutritious value to milk, filling up the food bar and saturation when consumed.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

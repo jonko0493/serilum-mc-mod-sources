@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "keepmysoiltilled",
-  "version": "2.0",
+  "version": "2.1",
 
   "name": "Keep My Soil Tilled",
   "description": "Keeps soil tilled below a stem block (melon/pumpkin) after harvesting.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

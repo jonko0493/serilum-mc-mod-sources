@@ -24,11 +24,13 @@ import com.natamus.villagernames.config.ConfigHandler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -42,15 +44,18 @@ public class Names {
 		File file = new File(dirpath + File.separator + "customnames.txt");
 		
 		if (dir.isDirectory() && file.isFile()) {
-			String cn = Files.readString(Paths.get(dirpath + File.separator + "customnames.txt"));
-			cn = cn.replace("\n", "").replace("\r", "");
-			
-			String[] cns = cn.split(",");
-			customVillagerNames = Arrays.asList(cns);
+			Path customNamePath = Paths.get(dirpath + File.separator + "customnames.txt");
+			String cn = Files.readString(customNamePath);
 
-			if (customVillagerNames.size() == 3) {
-				if (customVillagerNames.contains("Rick") && customVillagerNames.contains("Bob") && customVillagerNames.contains("Eve"))	{ // prevent old default custom names config file from being used.
-					customVillagerNames = new ArrayList<String>();
+			if (StringFunctions.sequenceCount(cn, ",") == 2 && cn.contains("Rick") && cn.contains("Bob") && cn.contains("Eve")) { // old config
+				FileChannel.open(customNamePath, StandardOpenOption.WRITE).truncate(0).close();
+			}
+			else {
+				cn = cn.replace("\n", "").replace("\r", "").strip();
+
+				String[] cns = cn.split(",");
+				for (String name : cns) {
+					customVillagerNames.add(name.strip());
 				}
 			}
 		}

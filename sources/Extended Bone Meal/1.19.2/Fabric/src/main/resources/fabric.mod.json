@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "extendedbonemeal",
-  "version": "3.1",
+  "version": "3.2",
 
   "name": "Extended Bone Meal",
   "description": "Extends bone meal behaviour. Instant grow with sneak, grow netherwart and other tweaks.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17",
-    "collective": ">=6.72"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

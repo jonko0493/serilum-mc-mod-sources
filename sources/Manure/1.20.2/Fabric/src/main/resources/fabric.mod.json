@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "manure",
-  "version": "3.0",
+  "version": "3.1",
 
   "name": "Manure",
   "description": "Animals periodically drop manure, by default twice a day. Can be used as a bone meal substitute.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "playertracking",
-  "version": "3.0",
+  "version": "3.1",
 
   "name": "Player Tracking",
   "description": "A PvP mod which allows tracking players via trackers in the world, originally created by mcpvp.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "youritemsaresafe",
-  "version": "3.4",
+  "version": "3.5",
 
   "name": "Your Items Are Safe",
   "description": "Generates a chest and armor stand at a player's death location to keep items from despawning. Highly configurable.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17",
-    "collective": ">=6.61"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

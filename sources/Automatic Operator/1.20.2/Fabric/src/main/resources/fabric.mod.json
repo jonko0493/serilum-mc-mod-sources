@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "automaticoperator",
-  "version": "1.0",
+  "version": "1.1",
 
   "name": "Automatic Operator",
   "description": "Automatically makes all or specific players OP in server environments when they log in.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

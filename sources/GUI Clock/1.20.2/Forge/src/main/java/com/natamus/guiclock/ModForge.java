@@ -20,7 +20,6 @@ import com.natamus.collective.check.RegisterMod;
 import com.natamus.guiclock.forge.config.IntegrateForgeConfig;
 import com.natamus.guiclock.forge.events.ForgeGUIEvent;
 import com.natamus.guiclock.util.Reference;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -50,7 +49,7 @@ public class ModForge {
 			return;
 		}
 
-		MinecraftForge.EVENT_BUS.register(new ForgeGUIEvent(Minecraft.getInstance(), Minecraft.getInstance().getItemRenderer()));
+		MinecraftForge.EVENT_BUS.register(new ForgeGUIEvent());
 	}
 
 	private static void setGlobalConstants() {

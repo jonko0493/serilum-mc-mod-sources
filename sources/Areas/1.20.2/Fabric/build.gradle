@@ -1,8 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'maven-publish'
-    id 'fabric-loom'
+    id 'fabric-loom' version '1.2-SNAPSHOT'
 }
 
 base {
@@ -19,6 +18,7 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":Common")
 
@@ -29,9 +29,9 @@ dependencies {
 }
 
 loom {
-    if (project(":Common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
+    /*if (project(":Common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
         accessWidenerPath.set(project(":Common").file("src/main/resources/${mod_id}.accesswidener"))
-    }
+    }*/
     mixin {
         defaultRefmapName.set("${mod_id}_fabric.refmap.json")
     }
@@ -51,30 +51,17 @@ loom {
     }
 }
 
+//tasks.named('compileJava', JavaCompile).configure {
 tasks.withType(JavaCompile).configureEach {
     source(project(":Common").sourceSets.main.allSource)
 }
-tasks.withType(Javadoc).configureEach {
-    source(project(":Common").sourceSets.main.allJava)
-}
-tasks.named("sourcesJar", Jar) {
-    from(project(":Common").sourceSets.main.allSource)
-}
+//tasks.withType(Javadoc).configureEach {
+//    source(project(":Common").sourceSets.main.allJava)
+//}
+//tasks.named("sourcesJar", Jar) {
+//    from(project(":Common").sourceSets.main.allSource)
+//}
 
 processResources {
     from project(":Common").sourceSets.main.resources
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId base.archivesName.get()
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
 }

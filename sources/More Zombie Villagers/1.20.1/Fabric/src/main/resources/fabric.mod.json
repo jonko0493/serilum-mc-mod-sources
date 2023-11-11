@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "morezombievillagers",
-  "version": "3.3",
+  "version": "3.4",
 
   "name": "More Zombie Villagers",
   "description": "Allows modifying the default chance a zombie spawn is of the villager variant.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "mineralchance",
-  "version": "3.2",
+  "version": "3.3",
 
   "name": "Mineral Chance",
   "description": "Adds a chance to find a random mineral inside a stone block when mining.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.19",
     "java": ">=17",
-    "collective": ">=6.61"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

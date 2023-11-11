@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "grabbymobs",
-  "version": "1.1",
+  "version": "1.2",
 
   "name": "Grabby Mobs",
   "description": "Makes all mobs which are able to carry gear always be able to do so.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.62"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

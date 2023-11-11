@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "underwaterenchanting",
-  "version": "2.3",
+  "version": "2.4",
 
   "name": "Underwater Enchanting",
   "description": "Allows the use of the enchantment table under water with maximum levels via bookshelves.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

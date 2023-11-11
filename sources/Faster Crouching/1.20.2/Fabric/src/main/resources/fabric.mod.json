@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "fastercrouching",
-  "version": "2.1",
+  "version": "2.3",
 
   "name": "Faster Crouching",
   "description": "Set the crouch/sneak speed of players to be the same as when walking and sprinting.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.5"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

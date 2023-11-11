@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "netherportalspread",
-  "version": "7.5",
+  "version": "7.6",
 
   "name": "Nether Portal Spread",
   "description": "Nether portals spread (custom) nether blocks to the overworld around the portal in a configurable radius.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.57"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

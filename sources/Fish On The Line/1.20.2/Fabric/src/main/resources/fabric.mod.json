@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "fishontheline",
-  "version": "3.0",
+  "version": "3.1",
 
   "name": "Fish On The Line",
   "description": "Rings the bell held in your offhand when you are fishing and something's on the line.",
@@ -23,13 +23,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.3"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }

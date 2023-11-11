@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "persistentinventorysearch",
-  "version": "1.0",
+  "version": "1.2",
 
   "name": "Persistent Inventory Search",
   "description": "Makes search queries inside the creative inventory persistent, even after switching tabs and closing the inventory.",
@@ -26,13 +26,12 @@
     "fabric": "*",
     "minecraft": ">=1.20",
     "java": ">=17",
-    "collective": ">=6.65"
+    "collective": ">=7.5"
   },
 
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/vFren9YzzN",
         "Donate <3" : "https://ricksouth.com/donate"
       }
     }
