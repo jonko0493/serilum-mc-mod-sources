@@ -32,8 +32,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Names {
 	public static List<String> customVillagerNames = new ArrayList<String>();
@@ -54,8 +52,12 @@ public class Names {
 				cn = cn.replace("\n", "").replace("\r", "").strip();
 
 				String[] cns = cn.split(",");
-				for (String name : cns) {
-					customVillagerNames.add(name.strip());
+				for (String n : cns) {
+					String name = n.strip();
+
+					if (!name.isEmpty()) {
+						customVillagerNames.add(name);
+					}
 				}
 			}
 		}
@@ -69,30 +71,32 @@ public class Names {
 	
 	public static String getRandomName() {
 		List<String> villagerNameList = new ArrayList<String>();
-		if (ConfigHandler.useDefaultFemaleNames && ConfigHandler.useDefaultMaleNames) {
-			villagerNameList = Stream.concat(GlobalVariables.femaleNames.stream(), GlobalVariables.maleNames.stream()).collect(Collectors.toList());
-		}
-		else if (ConfigHandler.useDefaultFemaleNames) {
-			villagerNameList = GlobalVariables.femaleNames;
-		}
-		else if (ConfigHandler.useDefaultMaleNames) {
-			villagerNameList = GlobalVariables.maleNames;
-		}
-		
+
 		if (ConfigHandler.useCustomNames && !customVillagerNames.isEmpty()) {
 			if (ConfigHandler.useBothCustomAndDefaultNames) {
-				villagerNameList = Stream.concat(villagerNameList.stream(), customVillagerNames.stream()).collect(Collectors.toList());
+				villagerNameList.add(randomFromList(customVillagerNames));
 			}
 			else {
-				villagerNameList = customVillagerNames;
+				return randomFromList(customVillagerNames);
 			}
+		}
+
+		if (ConfigHandler.useDefaultFemaleNames) {
+			villagerNameList.add(randomFromList(GlobalVariables.femaleNames));
+		}
+
+		if (ConfigHandler.useDefaultMaleNames) {
+			villagerNameList.add(randomFromList(GlobalVariables.maleNames));
 		}
 		
 		if (villagerNameList.isEmpty()) {
 			return "";
 		}
-		
-		String name = villagerNameList.get(GlobalVariables.random.nextInt(villagerNameList.size())).toLowerCase();
-		return StringFunctions.capitalizeEveryWord(name);
+
+		return StringFunctions.capitalizeEveryWord(randomFromList(villagerNameList));
+	}
+
+	private static String randomFromList(List<String> list) {
+		return list.get(GlobalVariables.random.nextInt(list.size())).toLowerCase();
 	}
 }

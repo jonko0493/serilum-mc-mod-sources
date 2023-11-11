@@ -6,7 +6,7 @@ logoFile="icon.png"
 
 [[mods]]
 modId="villagernames"
-version="6.4"
+version="6.5"
 displayName="Villager Names"
 displayURL="https://curseforge.com/minecraft/mc-mods/villager-names"
 authors="Rick South"
@@ -22,7 +22,7 @@ If you would like to contribute too, check out https://ricksouth.com/donate. App
 [[dependencies.villagernames]]
     modId="collective"
     mandatory=true
-    versionRange="[7.3,)"
+    versionRange="[7.5,)"
     ordering="NONE"
     side="BOTH"
 

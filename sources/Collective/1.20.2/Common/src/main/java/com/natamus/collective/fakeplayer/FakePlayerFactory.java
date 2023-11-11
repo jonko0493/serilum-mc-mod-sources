@@ -20,40 +20,32 @@ import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.server.level.ServerLevel;
 
-import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.UUID;
 
 public class FakePlayerFactory {
-	private static final GameProfile MINECRAFT = new GameProfile(UUID.fromString("41C82C87-7AfB-4024-BA57-13D2C99CAE77"), "[Minecraft]");
-	private static final Map<GameProfile, FakePlayer> fakePlayers = Maps.newHashMap();
-	private static WeakReference<FakePlayer> MINECRAFT_PLAYER = null;
+    private static final GameProfile MINECRAFT = new GameProfile(UUID.fromString("41C82C87-7AfB-4024-BA57-13D2C99CAE77"), "[Minecraft]");
+    // Map of all active fake player usernames to their entities
+    private static final Map<FakePlayerKey, FakePlayer> fakePlayers = Maps.newHashMap();
 
-	public static FakePlayer getMinecraft(ServerLevel world) {
-		FakePlayer ret = MINECRAFT_PLAYER != null ? MINECRAFT_PLAYER.get() : null;
-		if (ret == null) {
-			ret = FakePlayerFactory.get(world,  MINECRAFT);
-			MINECRAFT_PLAYER = new WeakReference<>(ret);
-		}
-		return ret;
-	}
+    private record FakePlayerKey(ServerLevel level, GameProfile username) {}
 
-	public static FakePlayer get(ServerLevel serverLevel, GameProfile gameProfile) {
-		if (!fakePlayers.containsKey(gameProfile)) {
-			FakePlayer fakePlayer = new FakePlayer(serverLevel.getServer(), serverLevel, gameProfile, null);
-			fakePlayers.put(gameProfile, fakePlayer);
-		}
+    public static FakePlayer getMinecraft(ServerLevel level) {
+        return get(level, MINECRAFT);
+    }
 
-		return fakePlayers.get(gameProfile);
-	}
+    /**
+     * Get a fake player with a given username,
+     * Mods should either hold weak references to the return value, or listen for a
+     * WorldEvent.Unload and kill all references to prevent worlds staying in memory,
+     * or call this function every time and let Forge take care of the cleanup.
+     */
+    public static FakePlayer get(ServerLevel level, GameProfile username) {
+        FakePlayerKey key = new FakePlayerKey(level, username);
+        return fakePlayers.computeIfAbsent(key, k -> new FakePlayer(k.level(), k.username()));
+    }
 
-	public static void unloadWorld(ServerLevel world) {
-		fakePlayers.entrySet().removeIf(entry -> entry.getValue().level() == world);
-		if (MINECRAFT_PLAYER != null && MINECRAFT_PLAYER.get() != null && MINECRAFT_PLAYER.get().level() == world) {
-			FakePlayer mc = MINECRAFT_PLAYER.get();
-			if (mc != null && mc.level() == world) {
-				MINECRAFT_PLAYER = null;
-			}
-		}
-	}
+    public static void unloadLevel(ServerLevel level) {
+        fakePlayers.entrySet().removeIf(entry -> entry.getValue().level() == level);
+    }
 }

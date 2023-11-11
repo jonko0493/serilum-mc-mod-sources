@@ -19,9 +19,9 @@ package com.natamus.hiddenrecipebook.neoforge.events;
 import com.natamus.hiddenrecipebook.data.Variables;
 import com.natamus.hiddenrecipebook.events.BookGUIEvent;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class NeoForgeBookGUIEvent {
@@ -31,7 +31,7 @@ public class NeoForgeBookGUIEvent {
 	}
 
 	@SubscribeEvent
-	public static void onKey(ScreenEvent.KeyPressed e) {
+	public static void onKey(ScreenEvent.KeyPressed.Pre e) {
 		if (e.getKeyCode() == Variables.hotkey.getKey().getValue()) {
 			BookGUIEvent.onHotkeyPress();
 		}

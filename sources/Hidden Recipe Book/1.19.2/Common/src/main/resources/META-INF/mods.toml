@@ -6,11 +6,11 @@ logoFile="icon.png"
 
 [[mods]]
 modId="hiddenrecipebook"
-version="4.1"
+version="4.3"
 displayName="Hidden Recipe Book"
 displayURL="https://curseforge.com/minecraft/mc-mods/hidden-recipe-book"
 authors="Rick South"
-description='''Hides the recipe book on crafting and furnace GUIs, can be toggled via a hotkey.
+description='''Hides the recipe book on crafting and furnace GUIs, toggleable via a hotkey.
 '''
 credits='''Thank you very much to my Membership sponsors for supporting the development of this mod:  
 

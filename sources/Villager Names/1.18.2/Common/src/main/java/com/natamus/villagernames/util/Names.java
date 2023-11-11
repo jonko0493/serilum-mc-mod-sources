@@ -32,25 +32,22 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Names {
 	public static List<String> customVillagerNames = new ArrayList<String>();
-	
+
 	public static void setCustomNames() throws IOException {
 		String dirpath = DataFunctions.getConfigDirectory() + File.separator + "villagernames";
 		File dir = new File(dirpath);
 		File file = new File(dirpath + File.separator + "customnames.txt");
-		
+
 		if (dir.isDirectory() && file.isFile()) {
 			Path customNamePath = Paths.get(dirpath + File.separator + "customnames.txt");
 			String cn = Files.readString(customNamePath);
 
 			if (StringFunctions.sequenceCount(cn, ",") == 2 && cn.contains("Rick") && cn.contains("Bob") && cn.contains("Eve")) { // old config
 				FileChannel.open(customNamePath, StandardOpenOption.WRITE).truncate(0).close();
-			}
-			else {
+			} else {
 				cn = cn.replace("\n", "").replace("\r", "").strip();
 
 				String[] cns = cn.split(",");
@@ -58,41 +55,41 @@ public class Names {
 					customVillagerNames.add(name.strip());
 				}
 			}
-		}
-		else {
+		} else {
 			boolean ignored = dir.mkdirs();
-			
+
 			PrintWriter writer = new PrintWriter(dirpath + File.separator + "customnames.txt", StandardCharsets.UTF_8);
 			writer.close();
 		}
 	}
-	
+
 	public static String getRandomName() {
 		List<String> villagerNameList = new ArrayList<String>();
-		if (ConfigHandler.useDefaultFemaleNames && ConfigHandler.useDefaultMaleNames) {
-			villagerNameList = Stream.concat(GlobalVariables.femaleNames.stream(), GlobalVariables.maleNames.stream()).collect(Collectors.toList());
-		}
-		else if (ConfigHandler.useDefaultFemaleNames) {
-			villagerNameList = GlobalVariables.femaleNames;
-		}
-		else if (ConfigHandler.useDefaultMaleNames) {
-			villagerNameList = GlobalVariables.maleNames;
-		}
-		
+
 		if (ConfigHandler.useCustomNames && !customVillagerNames.isEmpty()) {
 			if (ConfigHandler.useBothCustomAndDefaultNames) {
-				villagerNameList = Stream.concat(villagerNameList.stream(), customVillagerNames.stream()).collect(Collectors.toList());
-			}
-			else {
-				villagerNameList = customVillagerNames;
+				villagerNameList.add(randomFromList(customVillagerNames));
+			} else {
+				return randomFromList(customVillagerNames);
 			}
 		}
-		
+
+		if (ConfigHandler.useDefaultFemaleNames) {
+			villagerNameList.add(randomFromList(GlobalVariables.femaleNames));
+		}
+
+		if (ConfigHandler.useDefaultMaleNames) {
+			villagerNameList.add(randomFromList(GlobalVariables.maleNames));
+		}
+
 		if (villagerNameList.isEmpty()) {
 			return "";
 		}
-		
-		String name = villagerNameList.get(GlobalVariables.random.nextInt(villagerNameList.size())).toLowerCase();
-		return StringFunctions.capitalizeEveryWord(name);
+
+		return StringFunctions.capitalizeEveryWord(randomFromList(villagerNameList));
+	}
+
+	private static String randomFromList(List<String> list) {
+		return list.get(GlobalVariables.random.nextInt(list.size())).toLowerCase();
 	}
 }

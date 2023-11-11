@@ -6,7 +6,7 @@ logoFile="icon.png"
 
 [[mods]]
 modId="villagernames"
-version="6.4"
+version="6.5"
 displayName="Villager Names"
 displayURL="https://curseforge.com/minecraft/mc-mods/villager-names"
 authors="Rick South"
