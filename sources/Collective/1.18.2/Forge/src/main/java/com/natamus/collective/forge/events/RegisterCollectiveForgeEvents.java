@@ -27,16 +27,16 @@ import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.WorldTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
 @EventBusSubscriber
-public class RegisterCollectiveEvents {
+public class RegisterCollectiveForgeEvents {
     @SubscribeEvent
-    public void onServerStarted(ServerStartingEvent e) {
+    public void onServerStarted(ServerAboutToStartEvent e) {
         GenerateJSONFiles.initGeneration(e.getServer());
     }
 

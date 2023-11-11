@@ -14,7 +14,7 @@
  * Thanks for looking at the source code! Hope it's of some use to your project. Happy modding!
  */
 
-package com.natamus.collective.neoforge.events;
+package com.natamus.collective.forge.events;
 
 import com.natamus.collective.config.GenerateJSONFiles;
 import com.natamus.collective.events.CollectiveEvents;
@@ -22,25 +22,26 @@ import com.natamus.collective.functions.WorldFunctions;
 import com.natamus.collective.util.CollectiveReference;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.neoforge.event.TickEvent;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.Phase;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber
-public class RegisterCollectiveEvents {
+public class RegisterCollectiveForgeEvents {
     @SubscribeEvent
-    public static void onServerStarted(ServerStartingEvent e) {
+    public void onServerStarted(ServerAboutToStartEvent e) {
         GenerateJSONFiles.initGeneration(e.getServer());
     }
 
     @SubscribeEvent
-    public static void onWorldTick(TickEvent.LevelTickEvent e) {
+    public void onWorldTick(TickEvent.LevelTickEvent e) {
         Level level = e.level;
-        if (level.isClientSide || !e.phase.equals(TickEvent.Phase.END)) {
+        if (level.isClientSide || !e.phase.equals(Phase.END)) {
             return;
         }
 
@@ -48,8 +49,8 @@ public class RegisterCollectiveEvents {
     }
 
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent e) {
-        if (!e.phase.equals(TickEvent.Phase.END)) {
+    public void onServerTick(TickEvent.ServerTickEvent e) {
+        if (!e.phase.equals(Phase.END)) {
             return;
         }
 
@@ -57,7 +58,7 @@ public class RegisterCollectiveEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onMobSpawnerSpecialSpawn(MobSpawnEvent.FinalizeSpawn e) {
+    public void onMobSpawnerSpecialSpawn(MobSpawnEvent.FinalizeSpawn e) {
         Level Level = WorldFunctions.getWorldIfInstanceOfAndNotRemote(e.getLevel());
         if (Level == null) {
             return;
@@ -71,7 +72,7 @@ public class RegisterCollectiveEvents {
     }
 
     @SubscribeEvent
-    public static void onEntityJoinLevel(EntityJoinLevelEvent e) {
+    public void onEntityJoinLevel(EntityJoinLevelEvent e) {
         if (!CollectiveEvents.onEntityJoinLevel(e.getLevel(), e.getEntity())) {
             e.setCanceled(true);
         }

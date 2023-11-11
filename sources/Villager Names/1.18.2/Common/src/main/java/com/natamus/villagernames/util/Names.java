@@ -47,15 +47,21 @@ public class Names {
 
 			if (StringFunctions.sequenceCount(cn, ",") == 2 && cn.contains("Rick") && cn.contains("Bob") && cn.contains("Eve")) { // old config
 				FileChannel.open(customNamePath, StandardOpenOption.WRITE).truncate(0).close();
-			} else {
+			}
+			else {
 				cn = cn.replace("\n", "").replace("\r", "").strip();
 
 				String[] cns = cn.split(",");
-				for (String name : cns) {
-					customVillagerNames.add(name.strip());
+				for (String n : cns) {
+					String name = n.strip();
+
+					if (!name.isEmpty()) {
+						customVillagerNames.add(name);
+					}
 				}
 			}
-		} else {
+		}
+		else {
 			boolean ignored = dir.mkdirs();
 
 			PrintWriter writer = new PrintWriter(dirpath + File.separator + "customnames.txt", StandardCharsets.UTF_8);
@@ -69,7 +75,8 @@ public class Names {
 		if (ConfigHandler.useCustomNames && !customVillagerNames.isEmpty()) {
 			if (ConfigHandler.useBothCustomAndDefaultNames) {
 				villagerNameList.add(randomFromList(customVillagerNames));
-			} else {
+			}
+			else {
 				return randomFromList(customVillagerNames);
 			}
 		}
@@ -82,6 +89,8 @@ public class Names {
 			villagerNameList.add(randomFromList(GlobalVariables.maleNames));
 		}
 
+		villagerNameList.removeIf(name -> name.equals(""));
+
 		if (villagerNameList.isEmpty()) {
 			return "";
 		}
@@ -90,6 +99,9 @@ public class Names {
 	}
 
 	private static String randomFromList(List<String> list) {
+		if (list.size() == 0) {
+			return "";
+		}
 		return list.get(GlobalVariables.random.nextInt(list.size())).toLowerCase();
 	}
 }

@@ -52,26 +52,31 @@ public class Names {
 				cn = cn.replace("\n", "").replace("\r", "").strip();
 
 				String[] cns = cn.split(",");
-				for (String name : cns) {
-					customVillagerNames.add(name.strip());
+				for (String n : cns) {
+					String name = n.strip();
+
+					if (!name.isEmpty()) {
+						customVillagerNames.add(name);
+					}
 				}
 			}
 		}
 		else {
 			boolean ignored = dir.mkdirs();
-			
+
 			PrintWriter writer = new PrintWriter(dirpath + File.separator + "customnames.txt", StandardCharsets.UTF_8);
 			writer.close();
 		}
 	}
-	
+
 	public static String getRandomName() {
 		List<String> villagerNameList = new ArrayList<String>();
 
 		if (ConfigHandler.useCustomNames && !customVillagerNames.isEmpty()) {
 			if (ConfigHandler.useBothCustomAndDefaultNames) {
 				villagerNameList.add(randomFromList(customVillagerNames));
-			} else {
+			}
+			else {
 				return randomFromList(customVillagerNames);
 			}
 		}
@@ -84,6 +89,8 @@ public class Names {
 			villagerNameList.add(randomFromList(GlobalVariables.maleNames));
 		}
 
+		villagerNameList.removeIf(name -> name.equals(""));
+
 		if (villagerNameList.isEmpty()) {
 			return "";
 		}
@@ -92,6 +99,9 @@ public class Names {
 	}
 
 	private static String randomFromList(List<String> list) {
+		if (list.size() == 0) {
+			return "";
+		}
 		return list.get(GlobalVariables.random.nextInt(list.size())).toLowerCase();
 	}
 }

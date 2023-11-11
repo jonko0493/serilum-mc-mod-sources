@@ -88,6 +88,8 @@ public class Names {
 		if (ConfigHandler.useDefaultMaleNames) {
 			villagerNameList.add(randomFromList(GlobalVariables.maleNames));
 		}
+
+		villagerNameList.removeIf(name -> name.equals(""));
 		
 		if (villagerNameList.isEmpty()) {
 			return "";
@@ -97,6 +99,9 @@ public class Names {
 	}
 
 	private static String randomFromList(List<String> list) {
+		if (list.size() == 0) {
+			return "";
+		}
 		return list.get(GlobalVariables.random.nextInt(list.size())).toLowerCase();
 	}
 }

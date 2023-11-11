@@ -1,6 +1,6 @@
 /*
  * This is the latest source code of Collective.
- * Minecraft version: 1.19.2.
+ * Minecraft version: 1.20.2.
  *
  * Please don't distribute without permission.
  * For all Minecraft modding projects, feel free to visit my profile page on CurseForge or Modrinth.
@@ -14,7 +14,7 @@
  * Thanks for looking at the source code! Hope it's of some use to your project. Happy modding!
  */
 
-package com.natamus.collective.forge.events;
+package com.natamus.collective.neoforge.events;
 
 import com.natamus.collective.config.GenerateJSONFiles;
 import com.natamus.collective.events.CollectiveEvents;
@@ -22,26 +22,25 @@ import com.natamus.collective.functions.WorldFunctions;
 import com.natamus.collective.util.CollectiveReference;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.TickEvent.Phase;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
 @EventBusSubscriber
-public class RegisterCollectiveEvents {
+public class RegisterCollectiveNeoForgeEvents {
     @SubscribeEvent
-    public void onServerStarted(ServerStartingEvent e) {
+    public static void onServerStarted(ServerAboutToStartEvent e) {
         GenerateJSONFiles.initGeneration(e.getServer());
     }
 
     @SubscribeEvent
-    public void onWorldTick(TickEvent.LevelTickEvent e) {
+    public static void onWorldTick(TickEvent.LevelTickEvent e) {
         Level level = e.level;
-        if (level.isClientSide || !e.phase.equals(Phase.END)) {
+        if (level.isClientSide || !e.phase.equals(TickEvent.Phase.END)) {
             return;
         }
 
@@ -49,8 +48,8 @@ public class RegisterCollectiveEvents {
     }
 
     @SubscribeEvent
-    public void onServerTick(TickEvent.ServerTickEvent e) {
-        if (!e.phase.equals(Phase.END)) {
+    public static void onServerTick(TickEvent.ServerTickEvent e) {
+        if (!e.phase.equals(TickEvent.Phase.END)) {
             return;
         }
 
@@ -58,31 +57,21 @@ public class RegisterCollectiveEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onMobSpawnerSpecialSpawn(LivingSpawnEvent.SpecialSpawn e) {
+    public static void onMobSpawnerSpecialSpawn(MobSpawnEvent.FinalizeSpawn e) {
         Level Level = WorldFunctions.getWorldIfInstanceOfAndNotRemote(e.getLevel());
         if (Level == null) {
             return;
         }
 
-        if (e.getSpawner() != null) {
-            e.getEntity().addTag(CollectiveReference.MOD_ID + ".fromspawner");
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onMobSpawnerCheckSpawn(LivingSpawnEvent.CheckSpawn e) {
-        Level Level = WorldFunctions.getWorldIfInstanceOfAndNotRemote(e.getLevel());
-        if (Level == null) {
-            return;
-        }
-
-        if (e.getSpawner() != null) {
-            e.getEntity().addTag(CollectiveReference.MOD_ID + ".fromspawner");
+        if (!e.isSpawnCancelled()) {
+            if (e.getSpawner() != null) {
+                e.getEntity().addTag(CollectiveReference.MOD_ID + ".fromspawner");
+            }
         }
     }
 
     @SubscribeEvent
-    public void onEntityJoinLevel(EntityJoinLevelEvent e) {
+    public static void onEntityJoinLevel(EntityJoinLevelEvent e) {
         if (!CollectiveEvents.onEntityJoinLevel(e.getLevel(), e.getEntity())) {
             e.setCanceled(true);
         }

@@ -18,7 +18,7 @@ package com.natamus.collective;
 
 import com.natamus.collective.check.RegisterMod;
 import com.natamus.collective.neoforge.config.CollectiveConfigScreen;
-import com.natamus.collective.neoforge.events.RegisterCollectiveEvents;
+import com.natamus.collective.neoforge.events.RegisterCollectiveNeoForgeEvents;
 import com.natamus.collective.util.CollectiveReference;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
@@ -46,7 +46,7 @@ public class CollectiveNeoForge {
     }
 	
     private void loadComplete(final FMLLoadCompleteEvent event) {
-    	NeoForge.EVENT_BUS.register(RegisterCollectiveEvents.class);
+    	NeoForge.EVENT_BUS.register(RegisterCollectiveNeoForgeEvents.class);
 	}
 
     private static void setGlobalConstants() {

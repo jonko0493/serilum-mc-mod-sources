@@ -63,10 +63,12 @@ public class VillagerEvent {
 				return;
 			}
 		}
-		
 
-		EntityFunctions.nameEntity(entity, Names.getRandomName());
-		entity.getTags().add(Reference.MOD_ID + ".named");
+		String name = Names.getRandomName();
+		if (!name.equals("")) {
+			EntityFunctions.nameEntity(entity, name);
+			entity.getTags().add(Reference.MOD_ID + ".named");
+		}
 	}
 
 	public static InteractionResult onVillagerInteract(Player player, Level level, InteractionHand hand, Entity entity, EntityHitResult hitResult) {

@@ -18,7 +18,7 @@ package com.natamus.collective;
 
 import com.natamus.collective.check.RegisterMod;
 import com.natamus.collective.forge.config.CollectiveConfigScreen;
-import com.natamus.collective.forge.events.RegisterCollectiveEvents;
+import com.natamus.collective.forge.events.RegisterCollectiveForgeEvents;
 import com.natamus.collective.util.CollectiveReference;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,7 +46,7 @@ public class CollectiveForge {
     }
 	
     private void loadComplete(final FMLLoadCompleteEvent event) {
-    	MinecraftForge.EVENT_BUS.register(new RegisterCollectiveEvents());
+    	MinecraftForge.EVENT_BUS.register(new RegisterCollectiveForgeEvents());
 	}
 
     private static void setGlobalConstants() {
