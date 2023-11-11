@@ -182,21 +182,21 @@ public class StringFunctions {
 	
 	
 	// START: GET functions
-	public static String getRandomName(boolean malenames, boolean femalenames) {
+	public static String getRandomName(boolean useFemaleNames, boolean useMaleNames) {
 		List<String> allnames;
-		if (malenames && femalenames) {
-			allnames = Stream.concat(GlobalVariables.femalenames.stream(), GlobalVariables.malenames.stream()).collect(Collectors.toList());
+		if (useFemaleNames && useMaleNames) {
+			allnames = Stream.concat(GlobalVariables.femaleNames.stream(), GlobalVariables.maleNames.stream()).collect(Collectors.toList());
 		}
-		else if (femalenames) {
-			allnames = GlobalVariables.femalenames;
+		else if (useFemaleNames) {
+			allnames = GlobalVariables.femaleNames;
 		}
-		else if (malenames) {
-			allnames = GlobalVariables.malenames;
+		else if (useMaleNames) {
+			allnames = GlobalVariables.maleNames;
 		}
 		else {
 			return "";
 		}
-		
+
 	    String name = allnames.get(GlobalVariables.random.nextInt(allnames.size())).toLowerCase();
 	    return capitalizeEveryWord(name);
 	}
