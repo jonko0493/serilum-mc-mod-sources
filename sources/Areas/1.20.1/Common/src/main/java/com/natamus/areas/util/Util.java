@@ -185,7 +185,7 @@ public class Util {
 		}
 
 		Optional<BlueMapAPI> blueMapAPI = BlueMapAPI.getInstance();
-        blueMapAPI.ifPresent(BlueMapIntegration::updateBlueMap);
+		blueMapAPI.ifPresent(BlueMapIntegration::updateBlueMap);
 	}
 
 	public static void enterArea(AreaObject areaObject, Player player) {
