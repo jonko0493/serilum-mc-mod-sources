@@ -226,6 +226,9 @@ public class Util {
 		AreaVariables.areaObjects.get(areaObject.level).remove(areaObject.location);
 		AreaVariables.enteredAreas.remove(areaObject);
 
+		Optional<BlueMapAPI> blueMapAPI = BlueMapAPI.getInstance();
+		blueMapAPI.ifPresent(BlueMapIntegration::updateBlueMap);
+
 		boolean shouldMessage = shouldMessagePlayer(areaObject, false);
 
 		if (shouldMessage) {
