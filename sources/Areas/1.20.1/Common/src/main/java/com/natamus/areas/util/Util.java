@@ -21,12 +21,14 @@ import com.natamus.areas.data.AreaVariables;
 import com.natamus.areas.data.ClientConstants;
 import com.natamus.areas.data.GUIVariables;
 import com.natamus.areas.functions.ZoneFunctions;
+import com.natamus.areas.integrations.BlueMapIntegration;
 import com.natamus.areas.objects.AreaObject;
 import com.natamus.collective.data.GlobalVariables;
 import com.natamus.collective.functions.HashMapFunctions;
 import com.natamus.collective.functions.SignFunctions;
 import com.natamus.collective.functions.StringFunctions;
 import com.natamus.collective.functions.TileEntityFunctions;
+import de.bluecolored.bluemap.api.BlueMapAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
@@ -45,6 +47,7 @@ import net.minecraft.world.level.block.entity.SignText;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class Util {
 	public static AreaObject getAreaSign(Level level, BlockPos signPos) {
@@ -180,6 +183,9 @@ public class Util {
 		if (shouldUpdateSign) {
 			TileEntityFunctions.updateTileEntity(level, signPos, signBlockEntity);
 		}
+
+		Optional<BlueMapAPI> blueMapAPI = BlueMapAPI.getInstance();
+        blueMapAPI.ifPresent(BlueMapIntegration::updateBlueMap);
 	}
 
 	public static void enterArea(AreaObject areaObject, Player player) {

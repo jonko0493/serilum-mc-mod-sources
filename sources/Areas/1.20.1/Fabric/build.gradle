@@ -19,6 +19,7 @@ dependencies {
 
     implementation "org.jetbrains:annotations:23.0.0"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    implementation "com.github.BlueMap-Minecraft:BlueMapAPI:v2.6.1"
     implementation project(":Common")
 
     modApi("com.terraformersmc:modmenu:7.0.1") { exclude(module: "fabric-api") }
