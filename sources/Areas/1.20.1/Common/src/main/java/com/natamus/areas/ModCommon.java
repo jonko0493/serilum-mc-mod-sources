@@ -22,6 +22,8 @@ import com.natamus.areas.util.Reference;
 import com.natamus.collective.config.GenerateJSONFiles;
 import de.bluecolored.bluemap.api.BlueMapAPI;
 
+import java.util.Optional;
+
 public class ModCommon {
 
 	public static void init() {
@@ -31,6 +33,10 @@ public class ModCommon {
 
 	private static void load() {
 		GenerateJSONFiles.requestJSONFile(Reference.MOD_ID, "area_names.json");
-		BlueMapAPI.onEnable(BlueMapIntegration::updateBlueMap);
+		try {
+			BlueMapAPI.onEnable(BlueMapIntegration::updateBlueMap);
+		} catch (NoClassDefFoundError | IllegalStateException ignored) {
+			System.out.println("BlueMap is not loaded");
+		}
 	}
 }

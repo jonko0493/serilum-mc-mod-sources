@@ -9,6 +9,14 @@ import de.bluecolored.bluemap.api.math.Color;
 import de.bluecolored.bluemap.api.math.Shape;
 
 public class BlueMapIntegration {
+    public static void updateBlueMap() {
+        try {
+            BlueMapAPI.getInstance().ifPresent(BlueMapIntegration::updateBlueMap);
+        } catch (NoClassDefFoundError | IllegalStateException ignore) {
+            System.out.println("BlueMap not loaded");
+        }
+    }
+
     public static void updateBlueMap(BlueMapAPI api) {
         final String areasId = "serilum-areas";
         final String areasLabel = "Areas";
